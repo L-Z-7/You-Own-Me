@@ -51,7 +51,7 @@ public class ReceiveFragment extends Fragment {
 
     private void initView(View view){
         // 设置 List View 的适配器
-        adapter = new DataAdapter(context, R.layout.list_item, (List<Record>)DataBank.getDateRecords());
+        adapter = new DataAdapter(context, R.layout.list_item, (List<Record>)DataBank.getReasonRecords());
         ListView listViewBooks = ((ListView) view.findViewById(R.id.list_view_data));
         listViewBooks.setAdapter(adapter);
 

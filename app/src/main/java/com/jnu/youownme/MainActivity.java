@@ -25,6 +25,7 @@ import com.jnu.youownme.dataprocessor.Reason;
 import com.jnu.youownme.dataprocessor.Record;
 import com.jnu.youownme.dataprocessor.Type;
 import com.jnu.youownme.ui.home.HomeFragment;
+import com.jnu.youownme.ui.receive.ReceiveFragment;
 import com.jnu.youownme.ui.render.RenderFragment;
 
 import androidx.annotation.Nullable;
@@ -60,13 +61,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 通过对话框编辑
                 showEditDialog(DataBank.getSelectedDate(), -1);
-
-                // 通过另一个Activity编辑
-//                Intent intent;
-//                intent = new Intent(MainActivity.this, EditActivity.class);
-//                intent.putExtra("data", DataBank.getSelectedDate().toString());
-//                intent.putExtra("position", -1);
-//                startActivityForResult(intent, REQUEST_CODE_ADD_RECORD);
             }
         });
 
@@ -164,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
                         HomeFragment.notifyDataSetChanged();
                         RenderFragment.notifyDataSetChanged();
+                        ReceiveFragment.notifyDataSetChanged();
                     }
                 });
         editDialog.setNegativeButton("取消",
