@@ -1,7 +1,7 @@
 package com.jnu.youownme.dataprocessor;
 
 public enum Type {
-    RECEIVE, RENDER, NULL;
+    RECEIVE, RENDER;
 
     @Override
     public String toString() {
@@ -20,7 +20,7 @@ public enum Type {
     }
 
     static public Type getType(String str){
-        Type type = NULL;
+        Type type = RECEIVE;
         switch (str){
             case "收礼":
                 type = RECEIVE;

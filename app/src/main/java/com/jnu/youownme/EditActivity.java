@@ -26,8 +26,8 @@ public class EditActivity extends AppCompatActivity {
     private Spinner spinnerType;
     private TextView textViewData;
 
-    private Type type = Type.NULL;
-    private Reason reason = Reason.NULL;
+    private Type type = Type.getType("");
+    private Reason reason = Reason.getReason("");
     private int position;
     private Date date;
 

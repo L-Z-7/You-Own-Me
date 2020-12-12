@@ -1,7 +1,7 @@
 package com.jnu.youownme.dataprocessor;
 
 public enum Reason {
-    MARRY, BIRTHDAY, NULL;
+    MARRY, BIRTHDAY;
 
     @Override
     public String toString() {
@@ -20,7 +20,7 @@ public enum Reason {
     }
 
     static public Reason getReason(String str){
-        Reason reason = NULL;
+        Reason reason = BIRTHDAY;
         switch (str){
             case "结婚":
                 reason = MARRY;
