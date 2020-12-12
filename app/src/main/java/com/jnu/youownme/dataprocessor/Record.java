@@ -51,6 +51,11 @@ public class Record implements Serializable {
     }
 
     public Type getType() {
+        try {
+            type.toString();
+        } catch (Exception e) {
+            type = Type.RECEIVE;
+        }
         return type;
     }
 
@@ -75,6 +80,11 @@ public class Record implements Serializable {
     }
 
     public Reason getReason() {
+        try {
+            reason.toString();
+        } catch (Exception e) {
+            reason = Reason.BIRTHDAY;
+        }
         return reason;
     }
 

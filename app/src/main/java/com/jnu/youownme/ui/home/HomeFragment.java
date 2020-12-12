@@ -38,7 +38,6 @@ import static android.app.Activity.RESULT_OK;
 
 
 public class HomeFragment extends Fragment {
-    private HomeViewModel homeViewModel;
     private CalendarView calendarView;
     static private DataAdapter adapter;
     static private Context context;
@@ -49,7 +48,6 @@ public class HomeFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         initData(view);
@@ -63,7 +61,6 @@ public class HomeFragment extends Fragment {
         context = this.getContext();
 
         DataBank.Load(context);
-//        DataBank.Clean();
 
         // 设置当前日期
         Calendar calendar = Calendar.getInstance();//取得当前时间的年月日 时分秒
