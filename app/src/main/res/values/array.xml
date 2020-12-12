@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_type">
+        <item>随礼</item>
+        <item>收礼</item>
+    </string-array>
+    <string-array name="array_reason">
+        <item>结婚</item>
+        <item>生日</item>
+    </string-array>
+</resources>
