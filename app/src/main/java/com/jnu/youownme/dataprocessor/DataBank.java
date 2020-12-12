@@ -10,15 +10,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Iterator;
 
 public class DataBank {
     static private final String DATES_FILE_NAME = "data.txt";
     static private Date selectedDate;
+    static private Reason selectedReason = Reason.BIRTHDAY;
     static private ArrayList<Record> allRecords = new ArrayList<>();
     static private ArrayList<Record> dateRecords = new ArrayList<>();
     static private ArrayList<Integer> yearGroup = new ArrayList<>();
     static private ArrayList<ArrayList<Record>> yearChild = new ArrayList<>();
+    static private ArrayList<Record> reasonRecords = new ArrayList<>();
 
     static public void Save(Context context){
         //序列化
@@ -49,6 +50,7 @@ public class DataBank {
         dateRecords.clear();
         yearChild.clear();
         yearGroup.clear();
+        reasonRecords.clear();
     }
 
     static public Date getSelectedDate() {
@@ -70,6 +72,14 @@ public class DataBank {
         for (Record record: allRecords){
             if(selectedDate.equals(record.getDate())){
                 dateRecords.add(record);
+            }
+        }
+
+        // 更新收礼的数组
+        reasonRecords.clear();
+        for (Record record: allRecords){
+            if(selectedReason == record.getReason()){
+                reasonRecords.add(record);
             }
         }
 
@@ -135,5 +145,9 @@ public class DataBank {
 
     static public ArrayList<Record> getDateRecords() {
         return dateRecords;
+    }
+
+    public static ArrayList<Record> getReasonRecords() {
+        return reasonRecords;
     }
 }

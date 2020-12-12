@@ -87,14 +87,4 @@
         app:layout_constraintTop_toTopOf="@+id/text_view_type"
         android:entries="@array/array_type" />
 
-    <TextView
-        android:id="@+id/text_view_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/data"
-        app:layout_constraintBottom_toTopOf="@+id/spinner_type"
-        app:layout_constraintStart_toStartOf="@+id/spinner_type" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

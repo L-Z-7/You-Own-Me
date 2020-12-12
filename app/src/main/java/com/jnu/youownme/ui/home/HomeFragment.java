@@ -200,6 +200,7 @@ public class HomeFragment extends Fragment {
         return super.onContextItemSelected(item);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch(requestCode){

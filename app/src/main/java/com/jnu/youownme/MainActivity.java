@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
         editDialog.setView(dialogView);
 
         // 获取组件
-        Button buttonOK = (Button) findViewById(R.id.button_ok);
-        Button buttonCancel = findViewById(R.id.button_cancel);
         final EditText editTextName = dialogView.findViewById(R.id.edit_text_name);
         final EditText editTextMoney = dialogView.findViewById(R.id.edit_text_money);
         Spinner spinnerReason = dialogView.findViewById(R.id.spinner_reason);

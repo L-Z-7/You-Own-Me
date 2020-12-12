@@ -5,7 +5,9 @@
         <item>收礼</item>
     </string-array>
     <string-array name="array_reason">
-        <item>结婚</item>
-        <item>生日</item>
+        <item>结婚大喜</item>
+        <item>生辰诞日</item>
+        <item>新造华堂</item>
+        <item>金榜题名</item>
     </string-array>
 </resources>
