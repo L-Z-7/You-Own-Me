@@ -80,8 +80,6 @@ public class EditActivity extends AppCompatActivity {
             }
         }
 
-
-
         // 随收礼列表选择
         spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

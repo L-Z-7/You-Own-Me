@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -44,6 +46,7 @@ public class HomeFragment extends Fragment {
     private final int CONTEXT_MENU_ITEM_UPDATE = CONTEXT_MENU_ITEM_DELETE + 1;
     private final int REQUEST_CODE_CHANGE = 809;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -55,6 +58,7 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void initData(View view){
         context = this.getContext();
 
@@ -125,6 +129,7 @@ public class HomeFragment extends Fragment {
             mView = view;
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
             // 修改当前日期
@@ -176,6 +181,7 @@ public class HomeFragment extends Fragment {
                 builder.setCancelable(true);
                 builder.setPositiveButton(getResources().getString(R.string.yes),
                         new DialogInterface.OnClickListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.N)
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 DataBank.remove(position);
@@ -209,7 +215,7 @@ public class HomeFragment extends Fragment {
                     String reasonString = data.getStringExtra("reason");
                     int position = data.getIntExtra("position", -1);
 
-                    DataBank.change(position,
+                    DataBank.change(
                             new Record(Type.getType(typeString), DataBank.getSelectedDate(),
                                     money, Reason.getReason(reasonString), name));
                     DataBank.Save(context);

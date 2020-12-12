@@ -3,6 +3,7 @@ package com.jnu.youownme;
 import android.content.Intent;
 import android.net.sip.SipSession;
 import android.net.sip.SipSession.Listener;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -16,6 +17,7 @@ import com.jnu.youownme.dataprocessor.Type;
 import com.jnu.youownme.ui.home.HomeFragment;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch (requestCode){

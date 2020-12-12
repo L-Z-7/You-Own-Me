@@ -1,97 +1,139 @@
 package com.jnu.youownme.dataprocessor;
 
 import android.content.Context;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class DataBank {
     static private final String DATES_FILE_NAME = "data.txt";
     static private Date selectedDate;
-    static private ArrayList<Record> records = new ArrayList<>();
+    static private ArrayList<Record> allRecords = new ArrayList<>();
     static private ArrayList<Record> dateRecords = new ArrayList<>();
-//    static private ArrayList<Record> reasonRecords = new ArrayList<>();
-
-    static public ArrayList<Record> getDateRecords() {
-        return dateRecords;
-    }
+    static private ArrayList<Integer> yearGroup = new ArrayList<>();
+    static private ArrayList<ArrayList<Record>> yearChild = new ArrayList<>();
 
     static public void Save(Context context){
         //序列化
         ObjectOutputStream outputStream = null;
         try {
             outputStream = new ObjectOutputStream(context.openFileOutput(DATES_FILE_NAME, Context.MODE_PRIVATE));
-            outputStream.writeObject(records);
+            outputStream.writeObject(allRecords);
             outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     static public void Load(Context context){
         //反序列化
         ObjectInputStream inputStream = null;
         try {
             inputStream = new ObjectInputStream(context.openFileInput(DATES_FILE_NAME));
-            records = (ArrayList<Record>) inputStream.readObject();
+            allRecords = (ArrayList<Record>) inputStream.readObject();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     static public void Clean(){
-        records.clear();
+        allRecords.clear();
         dateRecords.clear();
-//        reasonRecords = new ArrayList<>();
+        yearChild.clear();
+        yearGroup.clear();
     }
 
     static public Date getSelectedDate() {
         return selectedDate;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     static public void Update(){
+        // 按年份顺排
+        allRecords.sort(new Comparator<Record>() {
+            @Override
+            public int compare(Record r1, Record r2) {
+                return r1.getDate().getYear() - r2.getDate().getYear();
+            }
+        });
+
+        // 更新home的数组
         dateRecords.clear();
-        for (Record record: records){
+        for (Record record: allRecords){
             if(selectedDate.equals(record.getDate())){
                 dateRecords.add(record);
             }
         }
+
+        // 更新随礼的数组
+        int i;
+        Integer year;
+        yearChild.clear();
+        yearGroup.clear();
+        for (Record record: allRecords){
+            year = record.getDate().getYear();
+            if(!yearGroup.contains(year)){
+                yearGroup.add(year);
+                yearChild.add(new ArrayList<Record>());
+            }
+            i = yearGroup.indexOf(year);
+            yearChild.get(i).add(record);
+        }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     static public void setSelectedDate(Date date) {
         selectedDate = date;
         Update();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     static public void add(Record record){
-        records.add(record);
-        if(record.getDate().equals(selectedDate))
-            dateRecords.add(record);
+        allRecords.add(record);
+        Update();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public static void remove(int position) {
         Record record = dateRecords.get(position);
-        for (Record t: records){
+        for (Record t: allRecords){
             if(t.equals(record)){
-                records.remove(t);
+                allRecords.remove(t);
                 break;
             }
         }
 
-        dateRecords.remove(position);
+        Update();
     }
 
-    public static void change(int position, Record record) {
-        dateRecords.get(position).assign(record);
-
-        for (Record t: records){
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static void change(Record record) {
+        for (Record t: allRecords){
             if (t.equals(record)) {
                 t.assign(record);
                 break;
             }
         }
+        Update();
+    }
+
+    public static ArrayList<Integer> getYearGroup() {
+        return yearGroup;
+    }
+
+    public static ArrayList<ArrayList<Record>> getYearChild() {
+        return yearChild;
+    }
+
+    static public ArrayList<Record> getDateRecords() {
+        return dateRecords;
     }
 }
