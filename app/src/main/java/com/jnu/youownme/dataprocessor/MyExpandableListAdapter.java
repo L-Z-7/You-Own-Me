@@ -130,6 +130,11 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         return 0;
     }
 
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+
     class GroupViewHolder {
         TextView tv_group;
     }

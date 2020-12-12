@@ -20,7 +20,7 @@ import com.jnu.youownme.dataprocessor.MyExpandableListAdapter;
 public class RenderFragment extends Fragment {
 
     private RenderViewModel notificationsViewModel;
-    private ExpandableListView elv;
+    private static ExpandableListView elv;
     private static MyExpandableListAdapter adapter;
     private Context context;
 
@@ -66,6 +66,10 @@ public class RenderFragment extends Fragment {
     public static void notifyDataSetChanged(){
         if(adapter != null){
             adapter.notifyDataSetChanged();
+            for (int i=0; i < adapter.getGroupCount(); ++i){
+                elv.collapseGroup(i);
+                elv.expandGroup(i);
+            }
         }
     }
 }

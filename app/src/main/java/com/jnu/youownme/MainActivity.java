@@ -15,6 +15,7 @@ import com.jnu.youownme.dataprocessor.Reason;
 import com.jnu.youownme.dataprocessor.Record;
 import com.jnu.youownme.dataprocessor.Type;
 import com.jnu.youownme.ui.home.HomeFragment;
+import com.jnu.youownme.ui.render.RenderFragment;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     DataBank.Save(this);
 
                     HomeFragment.notifyDataSetChanged();
+                    RenderFragment.notifyDataSetChanged();
                 }
                 break;
             default:
