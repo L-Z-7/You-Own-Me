@@ -18,16 +18,12 @@ import com.jnu.youownme.R;
 import com.jnu.youownme.dataprocessor.MyExpandableListAdapter;
 
 public class RenderFragment extends Fragment {
-
-    private RenderViewModel notificationsViewModel;
     private static ExpandableListView elv;
     private static MyExpandableListAdapter adapter;
     private Context context;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(RenderViewModel.class);
         View view = inflater.inflate(R.layout.fragment_render, container, false);
 
         initView(view);

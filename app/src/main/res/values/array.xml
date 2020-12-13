@@ -10,4 +10,7 @@
         <item>新造华堂</item>
         <item>金榜题名</item>
     </string-array>
+    <string-array name="array_fragment">
+        <item>主页</item>
+    </string-array>
 </resources>

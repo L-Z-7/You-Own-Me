@@ -30,6 +30,7 @@ import com.jnu.youownme.ui.render.RenderFragment;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -51,9 +54,14 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_render, R.id.navigation_home, R.id.navigation_receive)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        // 隐藏标题
+//        ActionBar actionBar = getSupportActionBar();
+//        if(actionBar != null){
+//            actionBar.hide();
+//        }
         // 悬浮按钮的响应函数
         FloatingActionButton button =  findViewById(R.id.floatingButton);
         button.setOnClickListener(new View.OnClickListener() {

@@ -6,10 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.render.RenderFragment">
 
+    <include layout="@layout/title_render"
+        android:id="@+id/title"/>
+
     <ExpandableListView
         android:id="@+id/elv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/title"/>
 
 <!--    <TextView-->
 <!--        android:id="@+id/text_render"-->

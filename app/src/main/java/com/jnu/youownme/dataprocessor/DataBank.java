@@ -150,4 +150,14 @@ public class DataBank {
     public static ArrayList<Record> getReasonRecords() {
         return reasonRecords;
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static void setSelectedReason(Reason reason) {
+        selectedReason = reason;
+        Update();
+    }
+
+    public static Reason getSelectedReason() {
+        return selectedReason;
+    }
 }

@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +23,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.jnu.youownme.R;
 import com.jnu.youownme.dataprocessor.DataBank;
 import com.jnu.youownme.dataprocessor.Date;
+import com.jnu.youownme.dataprocessor.Reason;
 import com.jnu.youownme.dataprocessor.Record;
 import com.jnu.youownme.ui.home.HomeFragment;
 
@@ -28,14 +32,12 @@ import java.util.List;
 
 public class ReceiveFragment extends Fragment {
     private Context context;
-    private ReceiveViewModel dashboardViewModel;
     private static DataAdapter adapter;
+    private Spinner spinnerReason;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(ReceiveViewModel.class);
         View view = inflater.inflate(R.layout.fragment_receive, container, false);
 
         initData(view);
@@ -50,13 +52,39 @@ public class ReceiveFragment extends Fragment {
     }
 
     private void initView(View view){
+        spinnerReason = view.findViewById(R.id.spinner_reason);
+
+        // 修改显示的Reason
+        SpinnerAdapter sAdapter = spinnerReason.getAdapter();
+        int len = sAdapter.getCount();
+        String str = DataBank.getSelectedReason().toString();
+        for (int i=0; i < len;  ++i){
+            if(str.equals(sAdapter.getItem(i).toString())){
+                spinnerReason.setSelection(i, true);
+                break;
+            }
+        }
+
         // 设置 List View 的适配器
         adapter = new DataAdapter(context, R.layout.list_item, (List<Record>)DataBank.getReasonRecords());
         ListView listViewBooks = ((ListView) view.findViewById(R.id.list_view_data));
         listViewBooks.setAdapter(adapter);
 
-        // 注册菜单
-        this.registerForContextMenu(listViewBooks);
+        // 标题栏下拉框响应函数
+        spinnerReason.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String info = parent.getItemAtPosition(position).toString();    // 获取选中的文本
+                DataBank.setSelectedReason(Reason.getReason(info));  // 转换为type
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     // list view的适配器
