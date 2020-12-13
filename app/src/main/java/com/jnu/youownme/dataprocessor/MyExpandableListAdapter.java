@@ -2,10 +2,12 @@ package com.jnu.youownme.dataprocessor;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jnu.youownme.R;
@@ -14,9 +16,21 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private GroupViewHolder groupViewHolder;
     private ChildViewHolder childViewHolder;
+    // 用于存放Indicator的集合
+    private SparseArray<ImageView> mIndicators;
+
+    // 根据分组的展开闭合状态设置指示器
+    public void setIndicatorState(int groupPosition, boolean isExpanded) {
+        if (isExpanded) {
+            mIndicators.get(groupPosition).setImageResource(R.mipmap.ic_expand);
+        } else {
+            mIndicators.get(groupPosition).setImageResource(R.mipmap.ic_collapse);
+        }
+    }
 
     public MyExpandableListAdapter(Context context) {
         this.context = context;
+        mIndicators = new SparseArray<>();
     }
 
     @Override
@@ -25,12 +39,17 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.first_list_layout, null);
             groupViewHolder = new GroupViewHolder();
             groupViewHolder.tv_group = convertView.findViewById(R.id.tv_group);
+            groupViewHolder.iv_indicator = convertView.findViewById(R.id.iv_indicator);
             convertView.setTag(groupViewHolder);
         } else {
             groupViewHolder = (GroupViewHolder) convertView.getTag();
         }
         //设置显示数据
         groupViewHolder.tv_group.setText(DataBank.getYearGroup().get(groupPosition)+"");
+        // 把位置和图标添加到Map
+        mIndicators.put(groupPosition, groupViewHolder.iv_indicator);
+        // 根据分组状态设置Indicator
+        setIndicatorState(groupPosition, isExpanded);
         return convertView;
     }
 
@@ -137,6 +156,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
     class GroupViewHolder {
         TextView tv_group;
+        ImageView iv_indicator;
     }
 
     class ChildViewHolder {

@@ -43,8 +43,14 @@ public class RenderFragment extends Fragment {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
                                         int groupPosition, long id) {
-                //返回false 否则一级列表不会展开
-                return false;
+                boolean groupExpanded = parent.isGroupExpanded(groupPosition);
+                if (groupExpanded) {
+                    parent.collapseGroup(groupPosition);
+                } else {
+                    parent.expandGroup(groupPosition, true);
+                }
+                adapter.setIndicatorState(groupPosition, groupExpanded);
+                return true;
             }
         });
 
