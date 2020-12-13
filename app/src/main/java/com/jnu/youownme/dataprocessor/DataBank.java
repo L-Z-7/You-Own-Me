@@ -78,7 +78,8 @@ public class DataBank {
         // 更新收礼的数组
         reasonRecords.clear();
         for (Record record: allRecords){
-            if(selectedReason == record.getReason()){
+            if(selectedReason == record.getReason() &&
+                    record.getType() == Type.RECEIVE){
                 reasonRecords.add(record);
             }
         }
@@ -89,6 +90,8 @@ public class DataBank {
         yearChild.clear();
         yearGroup.clear();
         for (Record record: allRecords){
+            if(record.getType() != Type.RENDER)
+                continue;
             year = record.getDate().getYear();
             if(!yearGroup.contains(year)){
                 yearGroup.add(year);

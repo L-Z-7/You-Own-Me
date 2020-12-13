@@ -6,11 +6,11 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Record implements Serializable {
-    Type type;
-    Date date;
-    double money;
-    Reason reason;
-    String name;
+    private Type type;
+    private Date date;
+    private double money;
+    private Reason reason;
+    private String name;
 
     public Record(Type type, Date date, double money, Reason reason, String name) {
         this.type = type;
