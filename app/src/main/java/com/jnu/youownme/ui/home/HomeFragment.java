@@ -80,6 +80,8 @@ public class HomeFragment extends Fragment {
         calendarView.setOnDateChangeListener(listener);
 
         // 设置 List View 的适配器
+        List<Record> tmp = (List<Record>)DataBank.getReasonRecords();
+        List<Record> tmp2 = (List<Record>)DataBank.getReasonRecords();
         adapter = new DataAdapter(context, R.layout.list_item, (List<Record>)DataBank.getDateRecords());
         ListView listViewBooks = ((ListView) view.findViewById(R.id.list_view_data));
         listViewBooks.setAdapter(adapter);
@@ -217,6 +219,7 @@ public class HomeFragment extends Fragment {
                             new Record(Type.getType(typeString), DataBank.getSelectedDate(),
                                     money, Reason.getReason(reasonString), name));
                     DataBank.Save(context);
+                    List<Record> tmp = (List<Record>)DataBank.getReasonRecords();
 
                     adapter.notifyDataSetChanged();
                 }

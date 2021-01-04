@@ -21,12 +21,20 @@
         android:unfocusedMonthDateColor="#f9f"
         android:weekSeparatorLineColor="#ff0" />
 
-    <ListView
-        android:id="@+id/list_view_data"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/calenderView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent">
 
+        <ListView
+            android:id="@+id/list_view_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+<!--        app:layout_constraintTop_toBottomOf="@id/calenderView"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"        -->
+
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

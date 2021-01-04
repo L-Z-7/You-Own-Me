@@ -68,6 +68,7 @@ public class RenderFragment extends Fragment {
     public static void notifyDataSetChanged(){
         if(adapter != null){
             adapter.notifyDataSetChanged();
+            // 更新二级列表
             for (int i=0; i < adapter.getGroupCount(); ++i){
                 elv.collapseGroup(i);
                 elv.expandGroup(i);
