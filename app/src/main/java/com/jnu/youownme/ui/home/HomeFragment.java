@@ -114,7 +114,7 @@ public class HomeFragment extends Fragment {
             ((TextView) view.findViewById(R.id.text_name)).setText(records.getName());
             ((TextView) view.findViewById(R.id.text_date)).setText(records.getDate().toString());
             ((TextView) view.findViewById(R.id.text_reason)).setText(records.getReason().toString());
-            ((TextView) view.findViewById(R.id.text_money)).setText("￥"+records.getMoney()+"");
+            ((TextView) view.findViewById(R.id.text_money)).setText("￥"+records.getMoney());
 
             return view;
         }

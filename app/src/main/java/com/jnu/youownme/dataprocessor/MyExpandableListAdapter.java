@@ -58,13 +58,35 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.second_list_layout, null);
             childViewHolder = new ChildViewHolder();
-            childViewHolder.tv_child = convertView.findViewById(R.id.tv_child);
+            childViewHolder.tv_type = convertView.findViewById(R.id.text_type);
+            childViewHolder.tv_reason = convertView.findViewById(R.id.text_reason);
+            childViewHolder.tv_name = convertView.findViewById(R.id.text_name);
+            childViewHolder.tv_money = convertView.findViewById(R.id.text_money);
+            childViewHolder.tv_date = convertView.findViewById(R.id.text_date);
+
             convertView.setTag(childViewHolder);
         } else {
             childViewHolder = (ChildViewHolder) convertView.getTag();
         }
-        childViewHolder.tv_child.setText(
-                DataBank.getYearChild().get(groupPosition).get(childPosition).toString()
+
+        childViewHolder.tv_type.setText(
+                DataBank.getYearChild().get(groupPosition).get(childPosition).getType().toString()
+        );
+
+        childViewHolder.tv_date.setText(
+                DataBank.getYearChild().get(groupPosition).get(childPosition).getDate().toString()
+        );
+
+        childViewHolder.tv_reason.setText(
+                DataBank.getYearChild().get(groupPosition).get(childPosition).getReason().toString()
+        );
+
+        childViewHolder.tv_name.setText(
+                DataBank.getYearChild().get(groupPosition).get(childPosition).getName()
+        );
+
+        childViewHolder.tv_money.setText(
+                "￥"+DataBank.getYearChild().get(groupPosition).get(childPosition).getMoney()
         );
         return convertView;
     }
@@ -160,6 +182,10 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     class ChildViewHolder {
-        TextView tv_child;
+        TextView tv_type;
+        TextView tv_date;
+        TextView tv_reason;
+        TextView tv_name;
+        TextView tv_money;
     }
 }
