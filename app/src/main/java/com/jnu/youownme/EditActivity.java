@@ -115,6 +115,7 @@ public class EditActivity extends AppCompatActivity {
                 Intent intent = new Intent();
 
                 // 回传数据
+                intent.putExtra("postData", DataBank.getDateRecords().get(position).toString());
                 intent.putExtra("name", editTextName.getText().toString());
                 intent.putExtra("money", Double.parseDouble(editTextMoney.getText().toString()));
                 intent.putExtra("reason", reason.toString());

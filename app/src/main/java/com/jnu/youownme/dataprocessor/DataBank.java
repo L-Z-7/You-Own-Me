@@ -128,9 +128,9 @@ public class DataBank {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static void change(Record record) {
+    public static void change(String postData, Record record) {
         for (Record t: allRecords){
-            if (t.equals(record)) {
+            if (t.toString().equals(postData)) {
                 t.assign(record);
                 break;
             }

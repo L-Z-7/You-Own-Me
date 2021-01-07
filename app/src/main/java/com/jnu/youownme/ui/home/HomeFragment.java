@@ -214,12 +214,12 @@ public class HomeFragment extends Fragment {
                     double money = data.getDoubleExtra("money", -1);
                     String reasonString = data.getStringExtra("reason");
                     int position = data.getIntExtra("position", -1);
+                    String postData = data.getStringExtra("postData");
 
-                    DataBank.change(
+                    DataBank.change(postData,
                             new Record(Type.getType(typeString), DataBank.getSelectedDate(),
                                     money, Reason.getReason(reasonString), name));
                     DataBank.Save(context);
-                    List<Record> tmp = (List<Record>)DataBank.getReasonRecords();
 
                     adapter.notifyDataSetChanged();
                 }
